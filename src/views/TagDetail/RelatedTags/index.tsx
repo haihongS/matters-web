@@ -12,7 +12,7 @@ import {
   usePublicQuery,
 } from '~/components'
 
-import { analytics, numAbbr } from '~/common/utils'
+import { analytics, numAbbr, toPath } from '~/common/utils'
 
 import { RELATED_TAGS } from './gql'
 import styles from './styles.css'
@@ -69,7 +69,16 @@ const RelatedTags = ({ tagId }: RelatedTagsProps) => {
                 ) => (
                   <li key={cursor}>
                     <section className="tag">
-                      <Link href={`/tags/${node?.id}`}>
+                      <Link
+                        href={
+                          toPath({
+                            page: 'tagDetail',
+                            id: node.id,
+                            content: node.content,
+                            // `/tags/${node?.id}`
+                          }).href
+                        }
+                      >
                         <a onClick={onClick(j, node?.id)}>
                           <div className="cover">
                             <figure
